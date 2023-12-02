@@ -77,7 +77,7 @@ body {
 }
 
 .selected-img {
-  max-width: 100%;
+  max-width: 120%;
   height: auto;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -85,4 +85,10 @@ body {
 
 .btn-group {
   margin-top: 20
+}
+.sign-out-btn {
+  position: fixed;  /* Fixed position relative to the viewport */
+  top: 10px;        /* 10px from the top */
+  right: 10px;      /* 10px from the right */
+  z-index: 1000;    /* Ensure it's above other elements */
 }

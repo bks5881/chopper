@@ -65,5 +65,11 @@
         }
       ]
     }
+  },
+  "storage": {
+    "meggitLeads": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    }
   }
 }

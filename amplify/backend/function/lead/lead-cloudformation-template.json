@@ -83,6 +83,27 @@
         "Timeout": 25
       }
     },
+    "DynamoDBFullAccessPolicy": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "DynamoDBFullAccessPolicy",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "dynamodb:*",
+              "Resource": "arn:aws:dynamodb:eu-central-1:051008277565:table/meggitLeads-staging"
+            }
+          ]
+        }
+      }
+    },
     "LambdaExecutionRole": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -124,7 +145,8 @@
     },
     "lambdaexecutionpolicy": {
       "DependsOn": [
-        "LambdaExecutionRole"
+        "LambdaExecutionRole",
+        "DynamoDBFullAccessPolicy"
       ],
       "Type": "AWS::IAM::Policy",
       "Properties": {

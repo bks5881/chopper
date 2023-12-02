@@ -18,11 +18,14 @@
       "function": {
         "lead": {
           "deploymentBucketName": "amplify-amplify90a5d64a667e4-staging-210616-deployment",
-          "s3Key": "amplify-builds/lead-74484763543136346879-build.zip"
+          "s3Key": "amplify-builds/lead-4a564251366163704b71-build.zip"
         }
       },
       "api": {
         "meggit3": {}
+      },
+      "storage": {
+        "meggitLeads": {}
       }
     }
   }

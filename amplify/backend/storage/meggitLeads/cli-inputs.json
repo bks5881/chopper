@@ -1,0 +1,14 @@
+{
+  "resourceName": "meggitLeads",
+  "tableName": "meggitLeads",
+  "partitionKey": {
+    "fieldName": "userid",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "interestId",
+    "fieldType": "number"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

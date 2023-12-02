@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from "./logo.svg";
 import "@aws-amplify/ui-react/styles.css";
+
 import {
   withAuthenticator,
   Button,
@@ -11,6 +12,8 @@ import {
   View,
   Card,
 } from "@aws-amplify/ui-react";
+import { generateClient } from 'aws-amplify/api';
+import { get } from 'aws-amplify/api';
 
 function App({ signOut }) {
   const [selectedHelicopter, setSelectedHelicopter] = useState(null);
@@ -19,6 +22,24 @@ function App({ signOut }) {
   const [showSelectedHelicopter, setShowSelectedHelicopter] = useState(false);
   const [inputText, setInputText] = useState("");
   
+  async function getTodo() {
+    try {
+      const restOperation = get({
+        apiName: 'meggit3',
+        path: '/lead',
+        // options: {
+        //   body: {
+        //     message: 'Mow the lawn'
+        //   }
+        // }
+      });
+      const response =await restOperation.response;
+      console.log('GET call succeeded');
+      console.log(response);
+    } catch (e) {
+      console.log('GET call failed: ', e);
+    }
+  }
   const handleSelectHelicopter = (helicopterId, helicopterName) => {
     setSelectedHelicopter(helicopterId);
     setSelectedHelicopterName(helicopterName);
@@ -38,6 +59,7 @@ function App({ signOut }) {
   const handleConfirmSelection = () => {
     setShowConfirmDialog(false);
     setShowSelectedHelicopter(true);
+    getTodo();
   };
 
   const handleCloseDialog = () => {
@@ -46,6 +68,7 @@ function App({ signOut }) {
 
   return (
     <div className="container mt-5">
+      <Button onClick={signOut} className="sign-out-btn">Sign Out</Button>
       <div className="row justify-content-between">
         <div className="col-auto">
           <img src="meggit.jpg" alt="Meggitt Logo" />
@@ -116,6 +139,7 @@ function App({ signOut }) {
           </div>
         </div>
       )}
+      
     </div>
   );
 };
