@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from "./logo.svg";
 import "@aws-amplify/ui-react/styles.css";
-
+import { getCurrentUser } from 'aws-amplify/auth';
 import {
   withAuthenticator,
   Button,
@@ -65,7 +65,21 @@ function App({ signOut }) {
   const handleCloseDialog = () => {
     setShowConfirmDialog(false);
   };
-
+  useEffect(() => {
+  async function currentAuthenticatedUser() {
+    try {
+      const { username, userId, signInDetails } = await getCurrentUser();
+      console.log(`The username: ${username}`);
+      setUsername(username);
+      console.log(`The userId: ${userId}`);
+      console.log(`The signInDetails: ${signInDetails}`);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  currentAuthenticatedUser();
+}, []);
+const [username, setUsername] = useState('');
   return (
     <div className="container mt-5">
       <Button onClick={signOut} className="sign-out-btn">Sign Out</Button>
@@ -74,7 +88,7 @@ function App({ signOut }) {
           <img src="meggit.jpg" alt="Meggitt Logo" />
         </div>
         <div className="col-auto">
-          <span>Logged in as {signOut}</span>
+          <span>Logged in as {username}</span>
         </div>
       </div>
 
