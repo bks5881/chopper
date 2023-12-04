@@ -14,6 +14,13 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/getlead/{userid}/{sessionid}": {
+      "name": "/getlead/{userid}/{sessionid}",
+      "lambdaFunction": "lead",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

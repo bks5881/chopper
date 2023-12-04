@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {   Button } from 'react-bootstrap';
 import { post } from 'aws-amplify/api';
+import MySummary from './MySummary';
 const ImageAnnotation = ({ selectedHelicopter, show, setImageDraw, userid, interestId }) => {
     const [startPoint, setStartPoint] = useState(null);
     const [lines, setLines] = useState([]);
@@ -10,6 +11,7 @@ const ImageAnnotation = ({ selectedHelicopter, show, setImageDraw, userid, inter
     const [lineComment, setLineComment] = useState('');
     const canvasRef = useRef(null);
     const [additionalInfo, setAdditionalInfo] = useState('');
+    const [showSummary, setShowSummary] = useState(false);
     //const [isLoading, setIsLoading] = useState(true);
     const [selectedLineIndex, setSelectedLineIndex] = useState(null); // 
     const handleCanvasClick = (event) => {
@@ -75,6 +77,7 @@ const ImageAnnotation = ({ selectedHelicopter, show, setImageDraw, userid, inter
             const response = await restOperation.response;
     
             console.log('Post call succeeded');
+            setShowSummary(true);
             //const responseBody = JSON.parse(response);
           } catch (e) {
             console.log('POSt call failed: ', e);
@@ -163,7 +166,9 @@ const ImageAnnotation = ({ selectedHelicopter, show, setImageDraw, userid, inter
         console.log("this is happening");
         //setShowTextbox(false);
     };
-
+    if(showSummary){
+        return <MySummary userid={userid} sessionId={interestId}/>
+    }
     return (
         <div style={{ position: 'relative' }} onClick={handleOutsideClick}>
             <h5>Build the network and its features</h5>
