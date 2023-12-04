@@ -9,6 +9,14 @@
           ],
           "category": "function",
           "resourceName": "lead"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "updatesession"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -46,6 +54,11 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "updatesession": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -62,6 +75,22 @@
         {
           "category": "function",
           "resourceName": "lead"
+        }
+      ]
+    },
+    "AMPLIFY_function_updatesession_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "updatesession"
+        }
+      ]
+    },
+    "AMPLIFY_function_updatesession_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "updatesession"
         }
       ]
     }

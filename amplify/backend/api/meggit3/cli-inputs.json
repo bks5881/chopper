@@ -7,6 +7,13 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/updatesession": {
+      "name": "/updatesession",
+      "lambdaFunction": "updatesession",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

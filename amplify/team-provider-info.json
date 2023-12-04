@@ -19,6 +19,10 @@
         "lead": {
           "deploymentBucketName": "amplify-amplify90a5d64a667e4-staging-210616-deployment",
           "s3Key": "amplify-builds/lead-4a564251366163704b71-build.zip"
+        },
+        "updatesession": {
+          "deploymentBucketName": "amplify-amplify90a5d64a667e4-staging-210616-deployment",
+          "s3Key": "amplify-builds/updatesession-446345497a4d39537936-build.zip"
         }
       },
       "api": {
