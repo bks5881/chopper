@@ -3,7 +3,7 @@ import {   Button } from 'react-bootstrap';
 import { post } from 'aws-amplify/api';
 import MySummary from './MySummary';
 import FinalConfirmation from './FinalConfirmation';
-const ImageAnnotation = ({ selectedHelicopter, show, setImageDraw, userid, interestId }) => {
+const ImageAnnotation = ({ selectedHelicopter, show, setImageDraw, userid, interestId, handleGoingBack }) => {
     const [startPoint, setStartPoint] = useState(null);
     const [lines, setLines] = useState([]);
     const [currentLine, setCurrentLine] = useState(null);
@@ -175,11 +175,16 @@ const ImageAnnotation = ({ selectedHelicopter, show, setImageDraw, userid, inter
     const closeAndReturn = () => {
         setShowConfirm(false);
     }
+    const handleSummaryBack = () =>{
+        setShowSummary(false);
+        setShowConfirm(true)
+        setImageLoaded(true)
+    }
     if(showConfirmm){
         return <FinalConfirmation show={true} handleConfirm={handleSubmit} handleClose={closeAndReturn}/>
     }
     if(showSummary){
-        return <MySummary userid={userid} sessionId={interestId}/>
+        return <MySummary userid={userid} sessionId={interestId} handleSummaryBack = {handleSummaryBack}/>
     }
     return (
         <div style={{ position: 'relative' }} onClick={handleOutsideClick}>
@@ -205,15 +210,9 @@ const ImageAnnotation = ({ selectedHelicopter, show, setImageDraw, userid, inter
        onChange={handleCommentChange}
    />
             )}
-            <Button 
-                variant="secondary" 
-                type="button" 
-                onClick={() => setImageDraw(false)}
-                className="mt-3"
-            >
-                Back
-            </Button>
-            <div>
+            <div  style={{ position: 'relative' }}>
+           
+            
                 <label htmlFor="additionalInfo">Additional Info:</label>
                 <textarea
                     id="additionalInfo"
@@ -223,6 +222,15 @@ const ImageAnnotation = ({ selectedHelicopter, show, setImageDraw, userid, inter
                     style={{ width: '100%', marginTop: '10px' }} // You can adjust the styling as needed
                 />
             </div>
+            <div className="d-flex justify-content-between mt-3">
+            <Button 
+                variant="secondary" 
+                type="button" 
+                onClick={() => setImageDraw(false)}
+                className="mt-3 mr-2"
+            >
+                Back
+            </Button>
             <Button 
             variant="primary" 
             type="button" 
@@ -231,6 +239,7 @@ const ImageAnnotation = ({ selectedHelicopter, show, setImageDraw, userid, inter
         >
             Next
         </Button>
+      </div>
         </div>
     );
 };

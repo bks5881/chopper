@@ -62,6 +62,10 @@ const CarCustomizationPage = ({ username, sessionId, selectedHelicopter }) =>  {
       }
       setIsReviewPage(true);
   };
+  const imageDrawHandler = () =>{
+    setImageDraw(false);
+
+  }
   const [showConfirmDataFeatures, setShowConfirmDataFeatures] = useState(false);
   const [showImageDraw, setImageDraw] = useState(false);
   const submitDataFeatures = async () => {
@@ -125,13 +129,18 @@ const CarCustomizationPage = ({ username, sessionId, selectedHelicopter }) =>  {
     { id: 'datu1', name: 'Datu 1', src: 'datu1.png' },
     { id: 'datu2', name: 'Datu 2', src: 'datu2.png' }
   ];
+  const hideImageAnnotation = () =>{
+    setImageDraw(false);
+
+  }
   if(showImageDraw){
     return <ImageAnnotation 
     selectedHelicopter={'Picture1.png'} 
     show={showImageDraw}
-    setImageDraw={setImageDraw}
+    setImageDraw={imageDrawHandler}
     userid={username}
     interestId={sessionId}
+    handleGoingBack={hideImageAnnotation}
      />
   }
   if (isReviewPage) {
