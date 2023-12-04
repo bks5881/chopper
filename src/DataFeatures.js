@@ -4,7 +4,7 @@ import { Container, Row, Col, Image, Button, Form } from 'react-bootstrap';
 const DataFeatures = ({ selectedDatu, selectedSensors, selectedHelicopter, handleNext }) => {
   const [outputLocation, setOutputLocation] = React.useState('BB');
   const [additionalInfo, setAdditionalInfo] = React.useState('');
-  const [showConfirmDataFeatures, setShowConfirmDataFeatures] = React.useState(false);
+  
   return (
     <>
       <Container>

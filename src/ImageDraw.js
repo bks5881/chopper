@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import {   Button } from 'react-bootstrap';
 import { post } from 'aws-amplify/api';
 import MySummary from './MySummary';
+import FinalConfirmation from './FinalConfirmation';
 const ImageAnnotation = ({ selectedHelicopter, show, setImageDraw, userid, interestId }) => {
     const [startPoint, setStartPoint] = useState(null);
     const [lines, setLines] = useState([]);
@@ -12,6 +13,7 @@ const ImageAnnotation = ({ selectedHelicopter, show, setImageDraw, userid, inter
     const canvasRef = useRef(null);
     const [additionalInfo, setAdditionalInfo] = useState('');
     const [showSummary, setShowSummary] = useState(false);
+    const [showConfirmm ,setShowConfirm] = useState(false);
     //const [isLoading, setIsLoading] = useState(true);
     const [selectedLineIndex, setSelectedLineIndex] = useState(null); // 
     const handleCanvasClick = (event) => {
@@ -46,7 +48,11 @@ const ImageAnnotation = ({ selectedHelicopter, show, setImageDraw, userid, inter
           {drawLine(newLine.startPoint, { x, y });}
         }
       };
+      const handleNext = async () =>{
+        setShowConfirm(true);
+      }
       const handleSubmit = async () => {
+        setShowConfirm(false);
         const lineData = lines.map((line, index) => {
             return {
                 startPoint: line.startPoint,
@@ -166,6 +172,12 @@ const ImageAnnotation = ({ selectedHelicopter, show, setImageDraw, userid, inter
         console.log("this is happening");
         //setShowTextbox(false);
     };
+    const closeAndReturn = () => {
+        setShowConfirm(false);
+    }
+    if(showConfirmm){
+        return <FinalConfirmation show={true} handleConfirm={handleSubmit} handleClose={closeAndReturn}/>
+    }
     if(showSummary){
         return <MySummary userid={userid} sessionId={interestId}/>
     }
@@ -214,7 +226,7 @@ const ImageAnnotation = ({ selectedHelicopter, show, setImageDraw, userid, inter
             <Button 
             variant="primary" 
             type="button" 
-            onClick={handleSubmit}
+            onClick={handleNext}
             className="mt-3"
         >
             Next
